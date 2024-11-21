@@ -1,0 +1,93 @@
+analysis and generate the bar chart in R Studio:
+
+# Load the dataset
+data <- read.csv("Match.csv")
+
+# Remove rows with missing values in the Match_Winner column
+data <- na.omit(data)
+
+# Create a new column to indicate if Toss Winner also won the match
+data$Toss_Winner_Match_Winner <- data$Toss_Winner == data$Match_Winner
+
+# Calculate proportions
+proportions <- as.data.frame(table(data$Toss_Winner_Match_Winner))
+colnames(proportions) <- c("Category", "Count")
+proportions$Proportion <- proportions$Count / sum(proportions$Count)
+proportions$Category <- ifelse(proportions$Category == "TRUE", 
+                               "Toss Winner Won", 
+                               "Not Toss Winner Won")
+
+# Plot the bar chart
+barplot(proportions$Proportion,
+        names.arg = proportions$Category,
+        col = c("lightblue", "mistyrose"),
+        ylim = c(0, 1),
+        main = "Proportion of Matches Won by Toss Winners vs. Non-Toss Winners",
+        ylab = "Proportion",
+        xlab = "Category")
+
+# Add percentage labels on the bars
+text(x = 1:2, 
+     y = proportions$Proportion + 0.02, 
+     labels = paste0(round(proportions$Proportion * 100, 1), "%"),
+     cex = 1, col = "black")
+
+
+
+Chi-Square Test:
+
+
+# Load the dataset
+data <- read.csv("Match.csv")
+
+# Remove rows with missing values in the Match_Winner column
+data <- na.omit(data)
+
+# Create a new column to indicate if Toss Winner also won the match
+data$Toss_Winner_Match_Winner <- data$Toss_Winner == data$Match_Winner
+
+# Create a contingency table
+contingency_table <- table(data$Toss_Winner_Match_Winner)
+
+# Perform a chi-square test
+chi_square_test <- chisq.test(contingency_table)
+
+# Display the results
+print("Contingency Table:")
+print(contingency_table)
+print("Chi-Square Test Results:")
+print(chi_square_test)
+
+
+
+test statistic for our data
+
+
+# Create a contingency table
+contingency_table <- table(data$Toss_Winner_Match_Winner)
+
+# Perform a chi-square test
+chi_square_test <- chisq.test(contingency_table)
+
+# Print the test statistic
+cat("Chi-Square Test Statistic:", chi_square_test$statistic, "\n")
+
+
+p-value from the chi-square test
+
+# Create a contingency table
+contingency_table <- table(data$Toss_Winner_Match_Winner)
+
+# Perform a chi-square test
+chi_square_test <- chisq.test(contingency_table)
+
+# Display the p-value
+cat("P-Value:", chi_square_test$p.value, "\n")
+
+
+Null Hypothesis (H₀):
+There is no difference in the proportions of matches won by teams that won the toss versus those that did not.
+
+Decision Rule:
+If p-value < 0.05: Reject the null hypothesis. This means there is a significant difference between the proportions.
+If p-value ≥ 0.05: Fail to reject the null hypothesis. This means there is no evidence to suggest a significant difference.
