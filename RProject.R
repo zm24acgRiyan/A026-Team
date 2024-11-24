@@ -17,6 +17,20 @@ total_matches <- nrow(data)
 toss_winner_win_percentage <- (toss_winner_win / total_matches) * 100
 toss_winner_loss_percentage <- (toss_winner_loss / total_matches) * 100
 toss_loser_win_percentage <- (toss_loser_win / total_matches) * 100
-toss_loser_loss_percentage <- (toss_loser_loss / total_matches) * 100.
+toss_loser_loss_percentage <- (toss_loser_loss / total_matches) * 100
+
+# Create a new data frame with the calculated percentages
+data_plot <- data.frame(
+  Toss_Outcome = c("Toss Winner", "Toss Winner", "Toss Loser", "Toss Loser"),
+  Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
+  Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
+)
+
+# Create a new data frame with the calculated percentages
+data_plot <- data.frame(
+  Toss_Outcome = c("Toss Winner", "Toss Winner", "Toss Loser", "Toss Loser"),
+  Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
+  Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
+)
 
 
