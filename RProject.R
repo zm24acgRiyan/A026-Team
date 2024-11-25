@@ -27,6 +27,8 @@ data_plot <- data.frame(
 )
 
 # Create the stacked bar chart with the calculated values
+library(ggplot2)
+
 ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
   geom_bar(stat = "identity", width = 0.6) +
   geom_text(
