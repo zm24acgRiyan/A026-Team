@@ -1,14 +1,14 @@
 # Load the dataset
 data <- read.csv("Match.csv")
 
-# Remove rows with missing values in the Match_Winner column
+# Remove rows with missing values in the relevant columns
 data <- na.omit(data)
 
 # Calculate the counts for each category
-toss_winner_win <- sum(data$Toss_Winner_Match_Winner == TRUE)
-toss_winner_loss <- sum(data$Toss_Winner_Match_Winner == FALSE & data$Toss_Winner != data$Match_Winner) # Toss Winner loses
-toss_loser_win <- sum(data$Toss_Winner_Match_Winner == FALSE & data$Toss_Winner != data$Match_Winner) # Toss Loser wins
-toss_loser_loss <- sum(data$Toss_Winner_Match_Winner == FALSE & data$Toss_Winner == data$Match_Winner) # Toss Loser loses
+toss_winner_win <- sum(data$Toss_Winner == data$Match_Winner)  # Toss Winner wins
+toss_winner_loss <- sum(data$Toss_Winner != data$Match_Winner)  # Toss Winner loses
+toss_loser_win <- sum(data$Toss_Winner != data$Match_Winner & data$Toss_Winner != "")  # Toss Loser wins
+toss_loser_loss <- sum(data$Toss_Winner == data$Match_Winner & data$Toss_Winner != "")  # Toss Loser loses
 
 # Total number of matches
 total_matches <- nrow(data)
@@ -36,10 +36,10 @@ ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
   ) +
   scale_fill_manual(
     values = c(
-      "Winner Wins" = "lightblue",
-      "Winner Loses" = "orange",  # Added color for Toss Winner losing
-      "Loser Wins" = "salmon",
-      "Loser Losses" = "#8A2BE2"  # Violet color for Toss Loser losing
+      "Winner Wins" = "lightblue",  # Toss Winner wins (sky blue)
+      "Winner Loses" = "orange",    # Toss Winner loses (orange)
+      "Loser Wins" = "salmon",      # Toss Loser wins (salmon)
+      "Loser Losses" = "#8A2BE2"    # Toss Loser loses (violet)
     )
   ) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Add space above bars
@@ -55,10 +55,8 @@ ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
     legend.title = element_blank()
   )
 
-#Code for chi- square test
-data <- read.csv("Match.csv")
+# Chi-square test for independence between Toss_Winner and Match_Winner
 table <- table(data$Toss_Winner, data$Match_Winner)
 print(table)
 chi_result <- chisq.test(table)
 print(chi_result)
-
