@@ -25,7 +25,6 @@ data_plot <- data.frame(
   Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
   Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
 )
-)
 
 # Create the stacked bar chart with the calculated values
 ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
