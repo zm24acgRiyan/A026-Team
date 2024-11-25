@@ -1,5 +1,6 @@
-# Load the dataset
-data <- read.csv("Match.csv")
+library(readr)
+Match <- read_csv("Match.csv")
+View(Match)
 
 # Remove rows with missing values in the Match_Winner column
 data <- na.omit(data)
@@ -32,5 +33,6 @@ data_plot <- data.frame(
   Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
   Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
 )
+
 
 
