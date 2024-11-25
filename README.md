@@ -12,10 +12,15 @@ Visualize the proportion of matches won by toss winners and toss losers.
 Group Members:
 
 Mohammed Riyan Ahmed - 23083699 - zm24acgRiyan
+
 Mohammed Sameer - 23109934 - Md-Sxmeer
-Akash Chaware - 23113941 - Salman31945243
+
+Akash Chaware - 23113941 - ac007a
+
 sridhar Kothwal - 23102666 - Sridharkothwal
+
 Pradeep Kumar Reddy Chinthakunta - 23093526 - CPKRUK
+
 Files:
 
 match_outcome_analysis.R: R script containing the code and analysis.
