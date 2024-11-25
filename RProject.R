@@ -5,6 +5,9 @@ View(Match)
 # Remove rows with missing values in the Match_Winner column
 data <- na.omit(data)
 
+# Create a new column to indicate if Toss Winner also won the match
+data$Toss_Winner_Match_Winner <- data$Toss_Winner == data$Match_Winner
+
 # Calculate the counts for each category
 toss_winner_win <- sum(data$Toss_Winner_Match_Winner == TRUE)
 toss_winner_loss <- sum(data$Toss_Winner_Match_Winner == FALSE & data$Toss_Winner != data$Match_Winner) # Toss Winner loses
@@ -27,6 +30,7 @@ data_plot <- data.frame(
   Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
 )
 
+library(ggplot2)
 # Create the stacked bar chart with the calculated values
 ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
   geom_bar(stat = "identity", width = 0.6) +
