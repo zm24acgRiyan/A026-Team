@@ -25,12 +25,6 @@ data_plot <- data.frame(
   Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
   Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
 )
-
-# Create a new data frame with the calculated percentages
-data_plot <- data.frame(
-  Toss_Outcome = c("Toss Winner", "Toss Winner", "Toss Loser", "Toss Loser"),
-  Result = c("Winner Wins", "Winner Loses", "Loser Wins", "Loser Losses"),
-  Percentage = c(toss_winner_win_percentage, toss_winner_loss_percentage, toss_loser_win_percentage, toss_loser_loss_percentage)
 )
 
 # Create the stacked bar chart with the calculated values
@@ -62,5 +56,10 @@ ggplot(data_plot, aes(x = Toss_Outcome, y = Percentage, fill = Result)) +
     legend.title = element_blank()
   )
 
-
+#Code for chi- square test
+data <- read.csv("Match.csv")
+table <- table(data$Toss_Winner, data$Match_Winner)
+print(table)
+chi_result <- chisq.test(table)
+print(chi_result)
 
